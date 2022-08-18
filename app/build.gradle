@@ -1,0 +1,28 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 33
+    buildToolsVersion "27.0.3"
+    defaultConfig {
+        applicationId "com.psdevelop.tdandtcpclient"
+        minSdkVersion 15
+        targetSdkVersion 33
+        versionCode 100015
+        versionName "1.0.15"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:23.1.1'
+    implementation 'com.android.support:support-v4:23.1.1'
+    //implementation files('libs/jtds-1.2.8.jar')
+    //implementation files('libs/sqljdbc.jar')
+    //implementation files('libs/sqljdbc4.jar')
+}
