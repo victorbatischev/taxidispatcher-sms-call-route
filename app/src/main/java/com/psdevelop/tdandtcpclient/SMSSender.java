@@ -31,8 +31,6 @@ public class SMSSender extends IntentService {
         super("SMSSender");
     }
 
-    private final String TAG = "SendSMS";
-
 
     private static class IDGenerator {
 
@@ -101,6 +99,7 @@ public class SMSSender extends IntentService {
         deliveredPI = PendingIntent.getBroadcast(SMSSender.this, deliveredID,
                 deliveryIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
+        String TAG = "SendSMS";
         Log.i(TAG, "sending SMS: parts: " + parts.size() + " message: "
                 + message);
 

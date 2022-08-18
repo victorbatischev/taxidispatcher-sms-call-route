@@ -119,35 +119,29 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MainActivity.TDC_PERMISSIONS_REQUEST_READ_CONTACTS: {
-                // If request is cancelled, the result arrays are empty.
-                if (    (grantResults.length == 1
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                        ||
-                        (grantResults.length == 2
-                                && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                                && grantResults[1] == PackageManager.PERMISSION_GRANTED) ) {
+        if (requestCode == MainActivity.TDC_PERMISSIONS_REQUEST_READ_CONTACTS) {// If request is cancelled, the result arrays are empty.
+            if ((grantResults.length == 1
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                    ||
+                    (grantResults.length == 2
+                            && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                            && grantResults[1] == PackageManager.PERMISSION_GRANTED)) {
 
-                } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-                    builder.setTitle("ПРЕДУПРЕЖДЕНИЕ")
-                            .setMessage("Вами не разрешены доступы к статусу телефона и/или отправке СМС, ряд функций не будет работать! ")
-                            // кнопка "Yes", при нажатии на которую приложение закроется
-                            .setPositiveButton("Ок",
-                                    new DialogInterface.OnClickListener()
-                                    {
-                                        public void onClick(DialogInterface dialog, int whichButton)
-                                        {
-                                            openApplicationSettings();
-                                        }
-                                    })
-                            .show();
-                }
-                return;
+                builder.setTitle("ПРЕДУПРЕЖДЕНИЕ")
+                        .setMessage("Вами не разрешены доступы к статусу телефона и/или отправке СМС, ряд функций не будет работать! ")
+                        // кнопка "Yes", при нажатии на которую приложение закроется
+                        .setPositiveButton("Ок",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        openApplicationSettings();
+                                    }
+                                })
+                        .show();
             }
-
+            return;
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
@@ -291,7 +285,7 @@ public class MainActivity extends ActionBarActivity {
                     "СООБЩЕНИЕ: "
                             +message, Toast.LENGTH_LONG);
             alertMessage.show();
-        } catch(Exception ex)   {
+        } catch(Exception ignored)   {
         }
     }
 

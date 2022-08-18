@@ -2,11 +2,8 @@ package com.psdevelop.tdandtcpclient;
 
 import android.os.Message;
 
-/**
- * Created by ADMIN on 18.06.2015.
- */
 public class CallItCheckTimer extends Thread {
-    private RouteService ownerSrv;
+    private final RouteService ownerSrv;
 
     public CallItCheckTimer(RouteService own)   {
         this.ownerSrv = own;
@@ -17,12 +14,11 @@ public class CallItCheckTimer extends Thread {
         Message msg = new Message();
         msg.obj = this.ownerSrv;
         msg.arg1 = RouteService.CHECK_CALLIT_ORDER;
-        this.ownerSrv.handle.sendMessage(msg);
+        RouteService.handle.sendMessage(msg);
     }
 
     public void run() {
         while (true) {
-
             try {
                 sleep(4000);
                 checkWaitingSMS();
@@ -30,10 +26,6 @@ public class CallItCheckTimer extends Thread {
                 //showMyMsg(
                 //        "\nОшибка таймера!" + e.getMessage());
             }
-
         }
-
     }
-
-
 }
